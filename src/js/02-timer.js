@@ -48,27 +48,27 @@ const options = {
   onClose(selectedDates) {
     if (selectedDates[0] > options.defaultDate) {
       refs.startBtn.disabled = false;
-
-      refs.startBtn.addEventListener('click', () => {
-        setIntervalFn = setInterval(() => {
-          const deltaTime = selectedDates[0] - Date.now();
-          const time = convertMs(deltaTime);
-
-          updateClockFace(time), 1000;
-
-          if (deltaTime < 1000) {
-            clearInterval(setIntervalFn);
-          }
-        });
-
-        refs.startBtn.disabled = true;
-        refs.datePicker.disabled = true;
-      });
     } else {
       Notiflix.Notify.failure('Please, choose any date and time in the future');
     }
   },
 };
+
+refs.startBtn.addEventListener('click', () => {
+  setIntervalFn = setInterval(() => {
+    const deltaTime = selectedDates[0] - Date.now();
+    const time = convertMs(deltaTime);
+
+    updateClockFace(time), 1000;
+
+    if (deltaTime < 1000) {
+      clearInterval(setIntervalFn);
+    }
+  });
+
+  refs.startBtn.disabled = true;
+  refs.datePicker.disabled = true;
+});
 
 flatpickr(refs.datePicker, options);
 
