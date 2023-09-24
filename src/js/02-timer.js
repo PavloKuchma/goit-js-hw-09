@@ -56,7 +56,8 @@ const options = {
 
 refs.startBtn.addEventListener('click', () => {
   setIntervalFn = setInterval(() => {
-    const deltaTime = selectedDates[0] - Date.now();
+    let targetDate = new Date(refs.datePicker.value);
+    const deltaTime = targetDate - Date.now();
     const time = convertMs(deltaTime);
 
     updateClockFace(time), 1000;
